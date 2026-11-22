@@ -1,9 +1,19 @@
-QMX+ This is a Windows GUI program developed by me Laurance Brungardt W5UW
-that allows you to view and edit all the menu settings you would normally
-have to access through PUTTY - Make a folder called QMX_Configurator copy
-the files from the repository to that folder and then create a desktop ICON
-pointing to the QMX_configurator.py file and that's it baby!
-Enjoy
+QMX+ Configurator
+Orignally developed as Windows GUI program developed Laurance Brungardt W5UW
+
+Ported this program to run under MacOS 
+to allow you to view and edit all the menu settings you would normally
+have to access through PUTTY when you access a QRP-LABS QMX/QMX+ Radio.
+
+Make a folder called QMX_Configurator copy
+the files from the repository to that folder.
+
+To run in Windows create a desktop ICON pointing to the qmx-run-win.cmd file
+
+To run under MacOS, first run the qmx-build-mac-app.sh 
+
+Then create a shortcut to the qmx-run-mac.command and exectute it.
+
 
 ## Running on Windows
 
@@ -30,7 +40,7 @@ python.org / Homebrew).
   `dist/QMX+Configurator.app` (drag it to /Applications if you like).
 
 Connecting: plug in the QMX/QMX+ and press **Refresh**. It appears as
-`/dev/cu.usbmodem…` (listed first). Only the `/dev/cu.*` form of each port is
+`/dev/cu.usbmodemâ€¦` (listed first). Only the `/dev/cu.*` form of each port is
 shown, because opening `/dev/tty.*` can hang waiting for carrier detect. The
 port box is editable, so you can also type a path the scan doesn't find,
 such as a virtual port made by a network relay. If a port is reported busy,
