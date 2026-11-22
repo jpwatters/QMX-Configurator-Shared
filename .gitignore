@@ -1,0 +1,9 @@
+*.zip
+.venv/
+.venv-win/
+build/
+dist/
+__pycache__/
+*.pyc
+*.spec
+.DS_Store
