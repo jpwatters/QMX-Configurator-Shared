@@ -1,18 +1,14 @@
 QMX+ Configurator
+
 Orignally developed as Windows GUI program developed Laurance Brungardt W5UW
 
 Ported this program to run under MacOS 
-to allow you to view and edit all the menu settings you would normally
+
+To allow you to view and edit all the menu settings you would normally
 have to access through PUTTY when you access a QRP-LABS QMX/QMX+ Radio.
 
 Make a folder called QMX_Configurator copy
 the files from the repository to that folder.
-
-To run in Windows create a desktop ICON pointing to the qmx-run-win.cmd file
-
-To run under MacOS, first run the qmx-build-mac-app.sh 
-
-Then create a shortcut to the qmx-run-mac.command and exectute it.
 
 
 ## Running on Windows
