@@ -2,7 +2,7 @@ QMX+ Configurator
 
 Orignally developed as Windows GUI program developed Laurance Brungardt W5UW
 
-Ported this program to run under MacOS 
+Ported this program to run under MacOS and to access a Network Shared QMX/QMX+
 
 To allow you to view and edit all the menu settings you would normally
 have to access through PUTTY when you access a QRP-LABS QMX/QMX+ Radio.
