@@ -31,12 +31,50 @@ python.org / Homebrew).
 
 * **Quick start:** double-click `qmx-run-mac.command` (or run `./qmx-run-mac.command`
   in Terminal). The first run creates a private `.venv` and installs PySide6
-  and pyserial; later runs start immediately.
+  and pyserial; later runs start immediately (to open it from /Applications,
+  see the next item). The program starts on its own and the Terminal window macOS
+  opened for the script closes itself (the first time, allow Terminal to
+  control Terminal). The window stays open only if something went wrong.
+  Program output goes to `~/Library/Logs/QMX-Configurator.log`.
+* **Add it to Applications:** copy `QMX+ Configurator.app` from the project
+  folder to /Applications (and drag it to the Dock if you like). It starts the
+  QMX+ Configurator in `~/src/QMX-Configurator` of whoever opens it, so the
+  same app works on any Mac where the project is installed in that folder.
+  * No Terminal window, except on the first run (or after requirements.txt
+    changes), when it opens `qmx-run-mac.command` so the setup can be seen.
+  * If the folder is missing or the program won't start, a dialog says why.
+  * Once the app has been signed and notarized (next item), it opens on any
+    Mac without a warning. An unsigned copy downloaded in a browser is blocked
+    the first time: open **System Settings > Privacy & Security**, click
+    **Open Anyway** next to the message about QMX+ Configurator, and confirm.
+    (macOS 15 Sequoia and later no longer allow Control-click > Open for this.)
+    A copy made with `git clone` is not blocked.
+
+  If the project is somewhere other than `~/src/QMX-Configurator`, use an
+  alias instead: select `qmx-run-mac.command`, choose **File > Make Alias**,
+  name it `QMX+ Configurator` and copy it to /Applications.
+* **Signing and notarizing the launcher app** (needs a paid Apple Developer
+  account; done once, and again only when the app itself changes):
+  1. Xcode > **Settings > Accounts** > your Apple ID > **Manage Certificates**
+     > **+** > **Developer ID Application**.
+  2. At account.apple.com, **Sign-In and Security > App-Specific Passwords**,
+     create one, then store it for Apple's notarization tool:
+     `xcrun notarytool store-credentials QMX-notary --apple-id <Apple ID> --team-id <Team ID>`
+     (Team ID: developer.apple.com > Account > Membership details).
+  3. Run `./qmx-sign-notarize-app.sh`. It builds the app's small compiled
+     launcher (`launcher/qmx-launcher.c`, Apple silicon + Intel), signs the
+     app with your Developer ID, sends it to Apple, staples Apple's ticket to
+     it and checks it with Gatekeeper ("Notarized Developer ID").
+
+  Run it again after changing `launcher/qmx-launcher.c` or anything inside
+  the app (its `Contents/Resources/qmx-launcher.sh`, icon or Info.plist);
+  changes to the Python program don't need it. Until the script has run, the
+  app uses a small shell-script stand-in and works the same, just unsigned.
 * **Standalone app:** run `./qmx-build-mac-app.sh`, then open
   `dist/QMX+Configurator.app` (drag it to /Applications if you like).
 
 Connecting: plug in the QMX/QMX+ and press **Refresh**. It appears as
-`/dev/cu.usbmodemâ€¦` (listed first). Only the `/dev/cu.*` form of each port is
+`/dev/cu.usbmodem…` (listed first). Only the `/dev/cu.*` form of each port is
 shown, because opening `/dev/tty.*` can hang waiting for carrier detect. The
 port box is editable, so you can also type a path the scan doesn't find,
 such as a virtual port made by a network relay. If a port is reported busy,

@@ -7,3 +7,4 @@ __pycache__/
 *.pyc
 *.spec
 .DS_Store
+fix-github-email.sh

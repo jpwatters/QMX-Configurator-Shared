@@ -35,7 +35,7 @@ from PySide6.QtGui import QAction, QBrush, QColor, QFont, QFontDatabase
 from PySide6.QtWidgets import (
     QAbstractItemView, QApplication, QComboBox, QDockWidget, QFileDialog,
     QHBoxLayout, QHeaderView, QLabel, QLineEdit, QMainWindow, QMessageBox,
-    QPlainTextEdit, QProgressBar, QPushButton, QSplitter, QTableWidget,
+    QPlainTextEdit, QProgressBar, QPushButton, QSizePolicy, QSplitter, QTableWidget,
     QTableWidgetItem, QTreeWidget, QTreeWidgetItem, QVBoxLayout, QWidget,
 )
 
@@ -174,6 +174,10 @@ class MainWindow(QMainWindow):
         bar.addWidget(self.btn_connect)
         self.lbl_radio = QLabel("Not connected")
         self.lbl_radio.setMinimumWidth(220)
+        # Two lines when connected (where / firmware): never squeeze it below
+        # the width its text needs, so the firmware version stays visible.
+        self.lbl_radio.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
+        self.lbl_radio.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
         bar.addSpacing(12)
         bar.addWidget(self.lbl_radio)
         bar.addStretch(1)
@@ -455,7 +459,7 @@ class MainWindow(QMainWindow):
         if net:
             st.setValue("relay_addr", qp.relay_addr(port))
         short = f"NAS {qp.relay_addr(port)}" if net else port.rsplit("/", 1)[-1]
-        self.lbl_radio.setText(f"Connected: {short}  |  fw {fw}")
+        self.lbl_radio.setText(f"Connected: {short}\nFirmware: {fw}")
         self.lbl_radio.setToolTip(f"Connected to {where}, firmware {fw}")
         self.statusBar().showMessage(f"Connected to {where}")
         if TESTED_FIRMWARE not in fw:

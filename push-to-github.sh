@@ -20,7 +20,7 @@ command -v git >/dev/null || { echo "git not found. Install it with: xcode-selec
 
 # 1. Files git must never upload.
 touch .gitignore
-for pat in '*.zip' '.venv/' '.venv-win/' 'build/' 'dist/' '__pycache__/' '*.pyc' '*.spec' '.DS_Store'; do
+for pat in '*.zip' '.venv/' '.venv-win/' 'build/' 'dist/' '__pycache__/' '*.pyc' '*.spec' '.DS_Store' 'fix-github-email.sh'; do
   grep -qxF "$pat" .gitignore || echo "$pat" >> .gitignore
 done
 
@@ -46,7 +46,7 @@ fi
 git rm -r -q --cached --ignore-unmatch -- '*.zip' >/dev/null
 git add -A
 # Keep the launch scripts runnable after a clone.
-for f in qmx-run-mac.command qmx-build-mac-app.sh push-to-github.sh; do
+for f in qmx-run-mac.command qmx-build-mac-app.sh qmx-sign-notarize-app.sh push-to-github.sh "QMX+ Configurator.app/Contents/MacOS/qmx-launcher" "QMX+ Configurator.app/Contents/Resources/qmx-launcher.sh"; do
   git ls-files --error-unmatch "$f" >/dev/null 2>&1 && git update-index --chmod=+x -- "$f"
 done
 if git diff --cached --name-only --diff-filter=ACMR | grep -qi '\.zip$'; then
